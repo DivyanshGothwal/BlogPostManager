@@ -1,0 +1,14 @@
+.App {
+  text-align: center;
+}
+.header{
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  
+}
+
+.section{
+  width: 80%;
+  margin: 66px auto;
+}

@@ -1,0 +1,26 @@
+.post{
+    box-sizing: border-box;
+    border: 0px solid grey;
+    padding: 0 24px;
+    margin-left: 20px;
+    text-align: center;
+    box-shadow: 0px 10px 25px -6px rgba(0,0,0,0.67);
+}
+
+.paragraph{
+    color: grey
+}
+
+.postEle{
+
+    cursor: pointer;
+}
+.postEle:hover,
+.postEle:active {
+    background-color: #C0DDF5;
+}
+
+.paragraph {
+    margin: 16px 0;
+    color: #ccc;
+}

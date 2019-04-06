@@ -1,0 +1,21 @@
+.NewPost{
+    display: flex;
+    
+    flex-flow: column;
+}
+.NewPost input,textarea{
+    border: 1px solid black;
+}
+.NewPost >*{
+    margin: 5px 30px;
+}
+.NewPost select{
+    width: 70%;
+    align-self: center;
+}
+.NewPost button{
+    width: 130px;
+    height: 30px;
+    align-self: center;
+    margin: 10px 0px
+}
