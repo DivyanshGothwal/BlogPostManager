@@ -2,9 +2,9 @@ import React from 'react';
 import './Post.css'
 const post = (props) => {
     return(
-        <div className="post postEle" >
-            <h2>Title</h2>
-            <p className="paragraph">Author</p>
+        <div onClick={props.clicked} className="post postEle" >
+            <h2>{props.title}</h2>
+            <p className="paragraph">{props.author}</p>
         </div>
     );
 }

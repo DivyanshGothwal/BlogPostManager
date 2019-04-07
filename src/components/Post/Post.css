@@ -1,6 +1,7 @@
 .post{
     box-sizing: border-box;
     border: 0px solid grey;
+    
     padding: 0 24px;
     margin-left: 20px;
     text-align: center;
@@ -12,8 +13,10 @@
 }
 
 .postEle{
-
+    width: 250px;
     cursor: pointer;
+
+    margin: 10px;
 }
 .postEle:hover,
 .postEle:active {
