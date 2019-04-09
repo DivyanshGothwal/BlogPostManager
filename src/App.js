@@ -1,57 +1,61 @@
 import React, { Component } from 'react';
 import Post from './components/Post/Post';
-import FullPost from './components/FullPost/FullPost';
-import NewPost from './container/NewPost/NewPost';
+// import AsyncNewPost from './container/NewPost/NewPost';
 import axios from './axios';
+import Posts from './container/Posts/Posts';
 import './App.css';
-
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
+import asyncComponent from './hoc/asyncComponent';
+const AsyncNewPost = asyncComponent(()=>{
+  return import('./container/NewPost/NewPost');//Promise.resolve();
+});
 
 class App extends Component {
   state={
-    posts:[],
-    selectedPostId:null,
-    error:false
+    auth:true
   }
-  componentDidMount(){
-    axios.get('').then(value => {
-      console.log(value);
-      this.setState({posts:value.data});
-    })
-    .catch(error=>{
-      this.setState({error:true});
-    });
-  }
-  postClickedHandler = (index) =>{
-    this.setState({selectedPostId:index+1});
-  }
-  postDeleteHandler = (index) =>{
-    if(index<0){
+  componentWillUnmount(){
+    console.log('[App.js] componentWillUnmount')
+}
+componentDidMount(){
+  console.log('[App.js] componentDidMount')
+} 
+  postDeleteHandler = (index) => {
+    if (index < 0) {
       return;
     }
     const postsArray = this.state.posts;
-    postsArray.splice(index,1);
-    this.setState({posts:postsArray,selectedPostId:null});
+    postsArray.splice(index, 1);
+    this.setState({ posts: postsArray, selectedPostId: null });
   }
   render() {
-
-    const postsArray = this.state.posts;
-    let posts = <p>Opps something went wrong!</p>;
-    if(!this.state.error){
-    posts= postsArray.map((eachPost,index) => {
-      return <Post clicked={()=>{this.postClickedHandler(index)}} key={index} author={index} title={eachPost.title}/>
-    });
-  }
     return (
       <div className="App">
-        <header className="header section">
-          {posts}
+        <header>
+          <nav>
+            <ul>
+              <li>
+                <NavLink to="/posts" exact activeClassName="divyansh">Posts</NavLink>
+              </li>
+              <li>
+                <NavLink to={{
+                  pathname: '/new-post',
+                  hash: '#submit',
+                  search: '?search-param=true'
+                }}
+                  exact
+                  activeClassName="divyansh">New Post</NavLink>
+              </li>
+            </ul>
+          </nav>
         </header>
-        <section className="section">
-          <FullPost selectedPostId= {this.state.selectedPostId} deletePost={()=>{this.postDeleteHandler(this.state.selectedPostId)}}/>
-        </section>
-        <section className="section">
-          <NewPost />
-        </section>
+        <Switch>
+          <Route path="/posts" component={Posts} />
+          {this.state.auth?<Route path="/new-post" exact render={() => <AsyncNewPost />} />:null}
+          <Route path="/" >
+            <Redirect to="/posts" />
+          </Route>
+        </Switch>
       </div>
     );
   }

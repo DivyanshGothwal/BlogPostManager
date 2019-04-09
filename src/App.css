@@ -12,3 +12,26 @@
   width: 80%;
   margin: 66px auto;
 }
+
+
+.App ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: yellow;
+  list-style: none;
+  margin: 0;
+  padding: 0px;
+}
+
+.App ul li{
+  padding: 10px;
+  
+}
+
+.App a:hover,
+.App a:active,
+.divyansh
+{
+  color: #fa923f;
+}

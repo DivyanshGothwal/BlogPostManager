@@ -1,5 +1,6 @@
 import React ,{Component} from 'react';
 import axios from 'axios';
+import {Redirect} from 'react-router-dom';
 import './NewPost.css';
 import '../../components/Post/Post.css';
 
@@ -7,7 +8,8 @@ class NewPost extends Component{
     state = {
         title: '',
         content: '',
-        author: 'Max'
+        author: 'Max',
+        submitted:false
     }
     inputTitleChangeHandler = (e) =>{
         this.setState({title:e.target.value});
@@ -22,9 +24,15 @@ class NewPost extends Component{
             author:this.state.author
         }
         axios.post('',post)
-        .then(e=>console.log(e));
+        .then((e)=>{
+            console.log(e);
+            this.setState({submitted:true});
+        });
     }
     render(){
+        if(this.state.submitted){
+            return <Redirect to="/post"/>
+        }
         return(
             <div className="NewPost post">
                 <h1 className>Add a Post</h1>
